@@ -28,13 +28,13 @@ Image:<input id="newImage">
 
 <script>
     //myDestinations-Array:
-    let myDestinations = []
-    //Display function:     
-    displayDestinations()
+    let myDestinations = []     
     
+    //Turn on server in render to see result
+    const HOST = 'https://json-server-csfh.onrender.com/destinations'
     //Delete Function:
     async function deleteDestination(destinationID){
-        const response = await axios.delete(`http://localhost:3000/destinations/${destinationID}`)
+        const response = await axios.delete(`${HOST}/${destinationID}`)
         alert("Delete successfully")
     }
 
@@ -46,18 +46,18 @@ Image:<input id="newImage">
         description: newDescription.value,
         image: newImage.value
       }
-      const response = await axios.post("http://localhost:3000/destinations/",newDestination);
+      const response = await axios.post(`${HOST},newDestination`);
       console.log("Added successfully")
       displayDestinations()  
     }
 
+    getDestinations()
     //Get destinations function from server
     async function getDestinations() {
-        const response = await axios.get("http://localhost:3000/destinations/");
+        const response = await axios.get(`${HOST}`);
         myDestinations = response.data;
         displayDestinations() 
     }
-    getDestinations()
 
     //Display Function
     function displayDestinations() {
